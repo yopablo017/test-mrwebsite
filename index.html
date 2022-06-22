@@ -34,12 +34,7 @@
     <div class="form">
       <label for="guessField">Ingresa el número a adivinar: </label>
       <input type="text" id="guessField" class="guessField" />
-      <input
-        type="submit"
-        onclick="checkGuess()"
-        value="Ingresar el número aleatorio"
-        class="guessSubmit"
-      />
+      <input type="submit" id="submit" onclick="checkGuess()" value="Ingresar el número aleatorio" class="guessSubmit"/>
     </div>
 
     <div class="resultParas">
@@ -63,7 +58,7 @@
     let resetButton;
 
     //funcion para leer el numero y verificar los resultados
-    function checkGuess() {
+     function checkGuess(e) {
       let userGuess = guessField.value;
       if (userGuess >= 1 && userGuess <= 100) {
         if (guessCount === 1) {
@@ -97,8 +92,9 @@
         alert("Porfavor ingrese un valor entero entre 1-100");
       }
     }
-    guessSubmit.addeventListener("click", checkGuess);
+    guessSubmit.addeventListener("click", checkGuess,false);
 
+    //funcion  con la que finaliza el juego 
     function setGameOver() {
       guessField.disabled = true;
       guessSubmit.disabled = true;
@@ -109,6 +105,7 @@
       resetButton.addeventListener("click", resetGame);
     }
 
+    //funcion para resetear los valores predefinidos de nuevo
     function resetGame() {
       guessCount = 1;
 
@@ -124,8 +121,8 @@
       guessField.focus();
 
       lastResult.style.backgroundColor = "white";
-
-      randomNumber = Math.floor(Math.random()) + 1;
+      
+      randomNumber = Math.floor(Math.random() * 99) + 1;
     }
   </script>
 </html>
